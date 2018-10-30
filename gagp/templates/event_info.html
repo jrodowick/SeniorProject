@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Events Information{% endblock %}
+
+{% block content %}
+<div class="container">
+<h1 class="tex-center">Event details for: {{ event.name}}</h1>
+  <p>Activity: {{ event.activity}}</p>
+  <p>Location: {{ event.location }}, {{ event.location.address }}, {{ event.location.city }}</p>
+  <p>Date: {{ event.date_of_event }}</p>
+  <p>Begin time: {{ event.time_of_event }}</p>
+  <p>Created by: {{ event.created_by }}</p>
+  <p>Number of attendees: {{ event.attendees.count }}</p>
+  <p>Attendees:
+    <ul>
+      {% for user in users %}
+      <li>{{user.username}}</li>
+      {% endfor %}
+    </ul>
+  </p>
+  <button type="button" class="btn btn-primary" onclick="join('{{ event.id }}')">Confirm attendance</button>
+  <button type="button" class="btn btn-success" onclick="add_google('{{ event.id }}')">Add to Google Calendar</button><br>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/events.js' %}"></script>
+{% endblock %}

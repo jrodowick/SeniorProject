@@ -1,0 +1,33 @@
+body {
+}
+
+.navbar {
+  margin-bottom: 2%;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 30%;
+  padding: 5%;
+   margin: auto;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search {
+  margin: auto;
+  width: 85%;
+  margin-bottom: 2%;
+}

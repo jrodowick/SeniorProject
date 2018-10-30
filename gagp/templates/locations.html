@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Locations{% endblock %}
+
+
+{% block content %}
+<!-- {% csrf_token %} -->
+
+<div class="container">
+
+  <input type="text" class="search" placeholder="Search for a location">
+  <button type="button" class="btn btn-secondary">Search</button>
+
+</div>
+
+<div class="container">
+  <div id="map">
+  </div>
+  <ul>
+    {% for e in events %}
+    <li>{{ e }}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<!-- Event Form Modal -->
+<div class="modal fade" role="dialog" id="eventForm" >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="#event-title" class="modal-title">Create new event</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body" >
+        <form method="post">
+          {% csrf_token %}
+          <h4>Title of event</h4>
+          {{ form.name }}<br>
+
+          <h4>Location</h4>
+          {{ form.location }}<br>
+
+          <h4>Activity</h4>
+          {{ form.activity }}<br>
+
+          <h4>Date of event</h4>
+          {{ form.date_of_event }}<br>
+
+          <h4>Time of event</h4>
+          {{ form.time_of_event }}<br>
+
+          {{ form.errors }}
+          <button class="btn btn-primary btn-block" type="Submit">Create</button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{% csrf_token %}
+<script>var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();</script>
+<script src="{% static 'js/maps.js' %}"></script>
+
+{% endblock %}

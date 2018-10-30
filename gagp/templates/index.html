@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+      <!-- Jumbotron Header -->
+      <header class="jumbotron my-4">
+        <h1 class="display-3">Get Active, Go Play!</h1>
+        <p class="lead">This is a website to connect people looking to meet up and play sports.</p>
+        <a href="/about" class="btn btn-primary btn-lg">Learn more &raquo;</a>
+      </header>
+
+      <!-- Page Features -->
+      <div class="row text-center">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/Locations.png' %}" style="height:10em;">
+            <div class="card-body">
+              <h4 class="card-title">Find a location</h4>
+              <p class="card-text">Use the Google Maps interface and find a location you want to create an event at!
+              If a location you want isn't on the map, just submit a new one.</p>
+            </div>
+            <div class="card-footer">
+              <a href="/locations" class="btn btn-primary">View Locations &raquo;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="{% static 'images/Activity.png' %}" style="height:10em;" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Create an event</h4>
+              <p class="card-text">Once you now where you want to go, create an event.  Let other know what you're trying to do by giving you event a title and choose what you want to actaully play!</p>
+            </div>
+            <div class="card-footer">
+              <a href="/events" class="btn btn-primary">Create Event &raquo;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+            <div class="card-body">
+              <h4 class="card-title">See who joins in</h4>
+              <p class="card-text">This app is about getting active but also about meeting new people.  Find the people going to you're event and start making friends.</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Find Out More!</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+            <div class="card-body">
+              <h4 class="card-title">Card title</h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
+            </div>
+            <div class="card-footer">
+              <a href="#" class="btn btn-primary">Find Out More!</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+</div>
+<!-- container -->
+
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; GAGP 2018</p>
+  </div>
+  <!-- /.container -->
+</footer>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Edit Profile</h1>
+  <form  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="btn btn-primary" type="submit">Submit &raquo;</button>
+  </form>
+  <a href="/change-password" type="button" class="btn btn-primary">Change Password</a>
+
+</div>
+
+
+{% endblock %}

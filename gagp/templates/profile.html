@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Profile</h1>
+  <p>Username: {{ user }}</p>
+  <p>First name: {{ user.first_name }}</p>
+  <p>Last name: {{ user.last_name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Preferred activites: {{ user.userprofile.preferences }}</p>
+  <p>City: {{ user.userprofile.city }}</p>
+  <p>Phone #: {{ user.userprofile.phone}}</p>
+  <a href="/profile/edit" class="btn btn-primary">Edit Profile &raquo;</a>
+</div>
+
+
+{% endblock %}

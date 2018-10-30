@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="form-signin">
+  <h1 class="text-center">Welcome</h1>
+
+  <h2 class="text-center">
+    You can log in here!
+  </h2>
+
+  <form method="post" >
+    {% csrf_token %}
+    <input type="username" name="username" autofocus class="form-control" placeholder="Username" required id="id_username" /><br>
+    <input type="password" name="password" required class="form-control" placeholder="Password" required id="id_password" />
+    <p style="text-align:center;"><a href="/register">Dont have an account?<br> Register here!</a></p>
+    <button class="btn btn-primary btn-block" type="submit">Login</button><br>
+    <p style="text-align:center;"><strong> -- OR -- </strong></p>
+     <a class="btn btn-lg btn-primary btn-block" href="{% url 'social:begin' 'google-oauth2' %}" style="color:white;">Login with
+       <img src="{% static 'images/google-signin.png' %}">
+     </a>
+     <!-- {{ form.errors }} -->
+  </form>
+
+</div>
+{% endblock %}
