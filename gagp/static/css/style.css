@@ -2,14 +2,91 @@ body {
 }
 
 .navbar {
-  margin-bottom: 2%;
+  /* margin-bottom: 2%; */
+}
+
+#location-btn {
+  /* margin-top: 2%; */
+  border: solid blue;
+}
+
+#location-btn:hover {
+  /* margin-top: 2%; */
+  color:white;
+  background: blue;
+}
+
+#event-btn {
+  /* margin-top: 2%; */
+  border: solid #42e2f4;
+}
+
+#event-btn:hover {
+  /* margin-top: 2%; */
+  color:white;
+  background: #42e2f4;
+}
+
+#user-btn {
+  /* margin-top: 2%; */
+  border: solid #41f47d;
+}
+
+#user-btn:hover {
+  color:white;
+  background: #41f47d;
+}
+
+.btn-group > .btn, .btn-primary {
+  border-radius: 6px;
+}
+
+.buffer .btn {
+  border-radius: 6px;
+
+  font-size: 2vw;
+  border: 3px;
+  color: black;
+  background: none;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.jumbo-main {
+  position: relative;
+  padding-bottom: 5%;
+  margin-bottom: 0rem;
+  background-image: url("/static/images/field.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+  width: 100%;
+  transition:opacity 2s;
+  color:white;
+
+}
+
+.jumbotron:hover {
+  opacity: 1.0;
+}
+
+.jumbotron  p , h1 {
+  /* background-color: grey; */
+
+}
+
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
 }
 
 .form-signin {
   width: 100%;
   max-width: 30%;
   padding: 5%;
-   margin: auto;
+  margin: auto;
 }
 
 .form-signin input[type="password"] {
@@ -27,7 +104,7 @@ body {
 }
 
 .search {
-  margin: auto;
+  margin-top: 2%;;
   width: 85%;
   margin-bottom: 2%;
 }
