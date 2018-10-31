@@ -1,5 +1,6 @@
 <html lang="en" dir="ltr">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -35,13 +36,6 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            {% elif selected == 'profile' %}
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
             </li>
             {% else %}

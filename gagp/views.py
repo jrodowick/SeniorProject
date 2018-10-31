@@ -19,7 +19,8 @@ import datetime
 
 # Create your views here.
 def index(request):
-    args = {}
+    selected = 'home'
+    args = {'selected':selected}
     return render(request, 'index.html', args)
 
 def locations(request):
@@ -145,7 +146,8 @@ def register(request):
 
 @login_required
 def view_profile(request):
-    args = {'user': request.user}
+    selected = 'profile'
+    args = {'user': request.user, 'selected':selected}
     return render(request, 'profile.html', args)
 
 @login_required
