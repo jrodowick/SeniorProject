@@ -5,13 +5,42 @@
 {% block title %}Events Information{% endblock %}
 
 {% block content %}
-<div class="container">
-<h1 class="tex-center">Event details for: {{ event.name}}</h1>
-  <p>Activity: {{ event.activity}}</p>
-  <p>Location: {{ event.location }}, {{ event.location.address }}, {{ event.location.city }}</p>
-  <p>Date: {{ event.date_of_event }}</p>
-  <p>Begin time: {{ event.time_of_event }}</p>
-  <p>Created by: {{ event.created_by }}</p>
+
+  <div class="jumbotron" >
+    <h1 class="text-center"><u>Event details for | {{ event.name }}</u></h1>
+  </div>
+
+  <div class="container">
+
+
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Meeting up to play {{ event.activity }}</h4>
+      <p class="card-text">Location: <i>{{ event.location }}, {{ event.location.address }}, {{ event.location.city }}</i></p>
+      <a href="#" class="card-link">Need directions? Click here for Google Maps</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Created by: {{ event.created_by }}</p>
+    </div>
+    <div class="col">
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <p>Date: {{ event.date_of_event }}</p>
+    </div>
+    <div class="col">
+      <p>Begin time: {{ event.time_of_event }}</p>
+    </div>
+  </div>
+
+
+
   <p>Number of attendees: {{ event.attendees.count }}</p>
   <p>Attendees:
     <ul>
