@@ -5,17 +5,56 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1>Edit Profile</h1>
-  <form  method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    <button class="btn btn-primary" type="submit">Submit &raquo;</button>
-  </form>
-  <a href="/change-password" type="button" class="btn btn-primary">Change Password</a>
 
+<div class="row">
+  <div class="form-signin" style="border:3px solid black;width:100%;">
+    <h1>Edit Profile</h1>
+    <form  method="post">
+      {% csrf_token %}
+      <h3>Email</h3>
+      {{ profile_form.email }}<br>
+      <h3>First Name</h3>
+      {{ profile_form.first_name }}<br>
+      <h3>Last Name</h3>
+      {{ profile_form.last_name }}<br>
+
+
+      {{ form.errors }}
+
+      <button class="btn btn-primary" type="submit">Submit &raquo;</button>
+    </form>
+  </div>
 </div>
+
+<div class="row">
+  <div class="form-signin" style="border:3px solid black;">
+    <h1>Edit Details</h1>
+    <ul>
+      <li>Use this section if you would like SMS updates for events</li>
+      <li>List your preferred activities</li>
+      <li>Youll be notified through the phone # below when a new event is created</li>
+    </ul>
+    <form  method="post">
+      {% csrf_token %}
+      <h3>Preferred Activities</h3>
+      {{ detail_form.preferences }}<br>
+      <h3>Phone Number</h3>
+      {{ detail_form.phone }}<br>
+
+
+      {{ form.errors }}
+
+      <button class="btn btn-primary" type="submit">Submit &raquo;</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
 
 
 {% endblock %}
