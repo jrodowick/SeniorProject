@@ -5,17 +5,57 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1>Register</h1>
 
-  <form method="post">
+<div class="container">
+  <br>
+
+  <h2 class="text-center" style="font-family:'Allerta Stencil';">Register an account</h2>
+  <ul style="font-size:110%">
+    <li>You will need to verify your new account via email.</li>
+    <li>A verification email will be sent upon completion of this form.</li>
+    <li>Once you click the link you will be signed in and redirected to the home page.</li>
+    <li>From there you can access your profile page where additional settings can be modified.</li>
+  </ul>
+</div>
+<div class="form-signin">
+
+  <form method="post" >
 
     {% csrf_token %}
 
-    {{ form.as_p }}
-    <button class="btn btn-submit"type="submit">Register</button>
+    {{ form.username }}<br>
+    {{ form.email }}<br>
+    {{ form.password1 }}<br>
+    {{ form.password2 }}
+    <button class="btn btn-primary btn-block"type="submit">Register</button>
   </form>
 </div>
 
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalLabel">Something went wrong!</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="color: black">{{ form.errors }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
+{% block scripts %}
+<script>
+if('{{form.errors}}' != '') {
+  $('#errorModal').modal('toggle');
+}
+</script>
 {% endblock %}
