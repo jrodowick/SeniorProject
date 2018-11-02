@@ -18,6 +18,7 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('change-password/', views.change_password, name='change_password'),
     path('locations/', views.locations, name='locations'),
+    path('send_alert/<event_id>/', views.send_alert, name='send_alert'),
     path('events/view/<event_id>/', views.view_event, name='view_event'),
     path('events/join/<event_id>/', views.join_event, name='join_event'),
     path('events/add_to_calendar/<event_id>/', views.add_to_calendar, name='add_to_calendar'),

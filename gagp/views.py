@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import (
+    ChangePassForm,
     RegistrationForm,
     EditProfileForm,
+    EditDetailsForm,
     EventForm,
 )
 from django.contrib.auth.models import User
@@ -14,6 +16,9 @@ from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
 import datetime
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 
 
@@ -38,13 +43,14 @@ def locations(request):
             )
             mod_entry.save()
             args = {'events':events, 'form':form}
-            return render(request, 'locations.html', args)
-        else:
-            return redirect('/locations')
+            # return render(request, 'locations.html', args)
+            return redirect('/send_alert/' + str(mod_entry.id))
+        # else:
+        #     return redirect('/locations')
     else:
         form = EventForm()
         args = {'events':events,'form':form}
-        return render(request, 'locations.html', args)
+    return render(request, 'locations.html', {'form':form})
 
 def view_event(request, event_id):
     # event_id = request.GET.get('id')
@@ -137,35 +143,59 @@ def register(request):
         if form.is_valid():
             user = form.save(commit = True)
             if(user is not None):
-                login(request,user)
+                login(request,user,backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
+
     else:
         form = RegistrationForm()
         args = {'form':form}
-        return render(request, 'register.html', args)
+    return render(request, 'register.html', {'form':form})
 
 @login_required
 def view_profile(request):
     selected = 'profile'
+    new_pref = []
+    request.user.userprofile.preferences = str.split(request.user.userprofile.preferences[1:-1], ', ')
+    for preference in request.user.userprofile.preferences:
+        new_pref.append(preference[1:-1])
+    request.user.userprofile.preferences = new_pref
+    print(request.user.userprofile.preferences)
     args = {'user': request.user, 'selected':selected}
     return render(request, 'profile.html', args)
 
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user)
+        profile_form = EditProfileForm(request.POST, instance=request.user)
+        detail_form = EditDetailsForm(request.POST, instance=request.user.userprofile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect('/profile')
+        if detail_form.is_valid():
+            detail_form.save()
+            return redirect('/profile')
+    else:
+        profile_form = EditProfileForm(instance=request.user)
+        detail_form = EditDetailsForm(instance=request.user.userprofile)
+        # args = {'form':form}
+    return render(request, 'edit_profile.html', {'profile_form':profile_form, 'detail_form':detail_form})
+
+@login_required
+def edit_details(request):
+    if request.method == 'POST':
+        form = EditDeatilsForm(request.POST, instance=request.user.userprofile)
         if form.is_valid():
             form.save()
             return redirect('/profile')
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditDetailsForm(instance=request.user.userprofile)
         args = {'form':form}
-        return render(request, 'edit_profile.html', args)
+    return render(request, 'edit_profile.html', {'detail_form':form})
 
 @login_required
 def change_password(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
+        form = ChangePassForm(data=request.POST, user=request.user)
 
         if form.is_valid():
             form.save()
@@ -174,6 +204,22 @@ def change_password(request):
         else:
             return redirect('/change-password')
     else:
-        form = PasswordChangeForm(user=request.user)
+        form = ChangePassForm(user=request.user)
         args = {'form':form}
-        return render(request, 'change_password.html', args)
+    return render(request, 'change_password.html', {'form':form})
+
+def send_alert(request, event_id):
+    activity = Event.objects.get(id=event_id).activity
+    users = User.objects.all()
+    message = 'A new event you prefer has been created!'
+    mail_list = []
+    for user in users:
+        if activity in user.userprofile.preferences:
+            mail_list.append(user.email)
+    send_mail(
+            'New activity posting',
+            'Get active, Go play has a new event you may like!',
+            settings.EMAIL_HOST_USER,
+            mail_list,
+            fail_silently=False)
+    return redirect('/locations')
