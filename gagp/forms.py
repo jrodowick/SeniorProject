@@ -3,60 +3,144 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import (
     UserCreationForm,
     UserChangeForm,
+    PasswordChangeForm,
     PasswordResetForm
     )
-from .models import Event, EVENT_CHOICES
+from .models import Event, EVENT_CHOICES, UserProfile
 import datetime
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    username = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'username',
+        'placeholder':'Username',
+        })
+    )
+    email = forms.EmailField(
+        label = 'Email',
+        required = True,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'email',
+        'placeholder':'Email address',
+        })
+    )
+    password1 = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'password',
+        'placeholder':'Password',
+        })
+    )
+    password2 = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'password',
+        'placeholder':'Confirm Password',
+        })
+    )
 
-    class Meta:
-        model = User
-        fields = (
-            'username',
-            'first_name',
-            'last_name',
-            'email',
-            'password1',
-            'password2'
+    def save(self, commit = True):
+        return User.objects.create_user(
+            self.cleaned_data['username'],
+            self.cleaned_data['email'],
+            self.cleaned_data['password1']
         )
-    def save(self, commit=True):
-        user = super(RegistrationForm, self).save(commit=False)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.eamil = self.cleaned_data['email']
-
-        if commit:
-            user.save()
-        return user
 
 
 class EditProfileForm(UserChangeForm):
-    preferences = forms.MultipleChoiceField(choices=EVENT_CHOICES, required=False)
-    phone = forms.IntegerField(required=False)
-
     class Meta:
         model = User
         fields = (
             'email',
             'first_name',
             'last_name',
+        )
+    email = forms.EmailField(
+        label = 'Email',
+        required = True,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'email',
+        'placeholder':'Email address',
+        })
+    )
+    first_name = forms.CharField(
+        required = False,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'First Name',
+        })
+    )
+    last_name = forms.CharField(
+        required = False,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'Last Name',
+        })
+    )
+
+
+class EditDetailsForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['preferences'].widget.attrs.update({'class':'form-control'})
+    class Meta:
+        model = UserProfile
+        fields = (
             'preferences',
             'phone'
         )
-    def save(self, commit=True):
-        user = super(EditProfileForm, self).save(commit=False)
-        user.userprofile.preferences = self.cleaned_data['preferences']
-        user.userprofile.phone = self.cleaned_data['phone']
 
-        if commit:
-            user.save()
-        return user
+    preferences = forms.MultipleChoiceField(
+        choices=EVENT_CHOICES,
+        required=False,
+    )
+    phone = forms.IntegerField(
+        required=False,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'Phone Number'
+        })
+    )
 
+class ChangePassForm(PasswordChangeForm):
+    class Meta:
+        model = User
+        fields = (
+            'old_password',
+            'new_password1',
+            'new_password2'
+        )
+    old_password = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'password',
+        'placeholder':'Old Password',
+        })
+    )
+    new_password1 = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'password',
+        'placeholder':'New Password',
+        })
+    )
+    new_password2 = forms.CharField(
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'password',
+        'placeholder':'Confirm New Password',
+        })
+    )
+
+
+## Used for date format on event form
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+## Used for time input on event form
 class TimeInput(forms.TimeInput):
     input_type = 'time'
 
