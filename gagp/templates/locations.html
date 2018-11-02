@@ -18,11 +18,6 @@
 <div class="container">
   <div id="map">
   </div>
-  <ul>
-    {% for e in events %}
-    <li>{{ e }}</li>
-    {% endfor %}
-  </ul>
 </div>
 
 <!-- Event Form Modal -->
@@ -51,7 +46,6 @@
           <h4>Time of event</h4>
           {{ form.time_of_event }}<br>
 
-          {{ form.errors }}
           <button class="btn btn-primary btn-block" type="Submit">Create</button>
         </form>
       </div>
@@ -69,5 +63,11 @@
 {% csrf_token %}
 <script>var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();</script>
 <script src="{% static 'js/maps.js' %}"></script>
-
+<script>
+var error ='{{form.errors}}'
+var message = error.substring(68,104)
+if('{{form.errors}}' != '') {
+  alert(message)
+}
+</script>
 {% endblock %}
