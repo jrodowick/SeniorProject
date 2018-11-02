@@ -8,70 +8,54 @@
 
 
       <!-- Jumbotron Header -->
-<header class="jumbotron jumbo-main" style="text-align:center;">
-  <h1 class="display-3 text-center" style="font-size:6vw;">Get Active and Go Play!</h1>
-  <p class="lead text-center" style="font-size:2vw;padding-bottom:1em;">A website to connect people looking to meet up and play sports.</p>
-  <div class="btn-group buffer">
-    <a id="location-btn" href="/locations" class="btn btn-primary">Search locations</a>
-    <a id="event-btn" href="/locations" class="btn btn-primary">Search events</a>
-    <a id="user-btn" href="/locations" class="btn btn-primary">Search users</a>
-
-  </div>
-
-  <!-- <a href="/about" class="btn btn-primary btn-lg">Learn more &raquo;</a> -->
-</header>
-
 <div class="container-fluid">
-
-      <!-- Page Features -->
-      <div class="row text-center">
-
-        <div class="col-lg-6 col-md-6 mb-2">
-
-        </div>
-
-        <div class="col-lg-6 col-md-6 mb-2">
-
-        </div>
-
-        <!-- <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-            <div class="card-body">
-              <h4 class="card-title">See who joins in</h4>
-              <p class="card-text">This app is about getting active but also about meeting new people.  Find the people going to you're event and start making friends.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Find Out More!</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-            <div class="card-body">
-              <h4 class="card-title">Card title</h4>
-              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-            </div>
-            <div class="card-footer">
-              <a href="#" class="btn btn-primary">Find Out More!</a>
-            </div>
-          </div>
-        </div> -->
-
-      </div>
-      <!-- /.row -->
+  <div class="jumbotron jumbo-main" style="text-align:center;">
+    <h1 class="display-3 text-center" style="font-size:6vw;">Get Active and Go Play!</h1>
+    <p class="lead text-center" style="font-size:2vw;padding-bottom:1em;">A website to connect people looking to meet up and play sports.</p>
+    <div class="btn-group buffer">
+      <a id="location-btn" href="/locations" class="btn btn-primary">Search locations</a>
+      <a id="event-btn" href="/locations" class="btn btn-primary">Search events</a>
+    </div>
+  </div>
 
 </div>
+
+<div class="container-fluid">
+  <div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target="#demo" data-slide-to="0" class="active"></li>
+      <li data-target="#demo" data-slide-to="1"></li>
+      <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <h1 style="color:white;padding-top:3%;" class="text-center">Use to Google Maps interface</h1>
+      </div>
+      <div class="carousel-item">
+
+      </div>
+      <div class="carousel-item">
+
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+  </div>
+</div>
+
+<!-- <hr class="style1"> -->
+
 <!-- container -->
 
-<footer id="footer" class="py-5 bg-dark">
-  <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; GAGP 2018</p>
-  </div>
-  <!-- /.container -->
-</footer>
+  <footer id="footer" class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; GAGP 2018</p>
+    </div>
+  </footer>
 
 
 {% endblock %}
