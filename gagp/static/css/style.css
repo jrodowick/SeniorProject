@@ -1,4 +1,10 @@
 body {
+  /* background: grey; */
+}
+
+.line-break {
+  border-left: 6px solid black;
+  height: 10%;
 }
 
 .navbar {
@@ -6,29 +12,24 @@ body {
 }
 
 #location-btn {
-  /* margin-top: 2%; */
   border: solid blue;
 }
 
 #location-btn:hover {
-  /* margin-top: 2%; */
   color:white;
   background: blue;
 }
 
 #event-btn {
-  /* margin-top: 2%; */
   border: solid #42e2f4;
 }
 
 #event-btn:hover {
-  /* margin-top: 2%; */
   color:white;
   background: #42e2f4;
 }
 
 #user-btn {
-  /* margin-top: 2%; */
   border: solid #41f47d;
 }
 
@@ -37,19 +38,43 @@ body {
   background: #41f47d;
 }
 
-.btn-group > .btn, .btn-primary {
-  border-radius: 6px;
-}
-
 .buffer .btn {
   border-radius: 6px;
 
-  font-size: 2vw;
+  font-size: 1.5vw;
   border: 3px;
   color: black;
   background: none;
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+#demo {
+  background-color:grey;
+  background-size: cover;
+}
+
+hr.style1 {
+  border-style: solid;
+  border-color: #275a99;
+  border-width: thick;
+  margin-left: 3%;
+  margin-right: 3%;
+  /*margin-top: 5%;*/
+  /*margin-bottom: 3%;*/
+}
+
+.carousel {
+  height:50vh;
+  /*background-color: red;*/
+}
+
+.carousel-indicators {
+  height: 10px;
 }
 
 .jumbo-main {
@@ -59,7 +84,7 @@ body {
   background-image: url("/static/images/field.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  opacity: 0.7;
+  opacity: 0.8;
   width: 100%;
   transition:opacity 2s;
   color:white;
@@ -75,16 +100,23 @@ body {
 
 }
 
-#footer {
+.carousel-inner img {
+      width:50%;
+      height: 100%;
+  }
+
+
+
+/* #footer {
    position:absolute;
    bottom:0;
    width:100%;
-   height:60px;   /* Height of the footer */
-}
+   height:60px;
+} */
 
 .form-signin {
   width: 100%;
-  max-width: 30%;
+  max-width: 50%;
   padding: 5%;
   margin: auto;
 }
@@ -101,6 +133,7 @@ body {
   height: auto;
   padding: 10px;
   font-size: 16px;
+  width:100%
 }
 
 .search {
