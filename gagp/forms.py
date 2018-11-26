@@ -96,6 +96,7 @@ class EditDetailsForm(forms.ModelForm):
     preferences = forms.MultipleChoiceField(
         choices=EVENT_CHOICES,
         required=False,
+        widget=forms.CheckboxSelectMultiple(),
     )
     phone = forms.IntegerField(
         required=False,

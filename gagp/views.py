@@ -159,7 +159,7 @@ def view_profile(request):
     for preference in request.user.userprofile.preferences:
         new_pref.append(preference[1:-1])
     request.user.userprofile.preferences = new_pref
-    print(request.user.userprofile.preferences)
+    # print(request.user.userprofile.preferences)
     args = {'user': request.user, 'selected':selected}
     return render(request, 'profile.html', args)
 

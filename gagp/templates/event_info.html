@@ -17,7 +17,7 @@
     <div class="card-body">
       <h4 class="card-title">Meeting up to play {{ event.activity }}</h4>
       <p class="card-text">Location: <i>{{ event.location }}, {{ event.location.address }}, {{ event.location.city }}</i></p>
-      <a href="#" class="card-link">Need directions? Click here for Google Maps</a>
+      <a target="_blank" href="https://google.com/maps/place/{{event.location}}" class="card-link">Need directions? Click here for Google Maps</a>
     </div>
   </div>
 

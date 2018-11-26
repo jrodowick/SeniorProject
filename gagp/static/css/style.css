@@ -115,8 +115,8 @@ hr.style1 {
 } */
 
 .form-signin {
-  width: 100%;
-  max-width: 50%;
+  /* width: 100%; */
+  max-width: 30%;
   padding: 5%;
   margin: auto;
 }
