@@ -9,9 +9,26 @@
 <!-- {% csrf_token %} -->
 
 <div class="container">
-
-  <input type="text" class="search" placeholder="Search for a location">
-  <button type="button" class="btn btn-secondary">Search</button>
+  <br>
+  <input type="text" class="form-control" placeholder="Search for a location" id="locSearch"><br>
+  <table class="table table-bordered" style="background-color:white;">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Address</th>
+        <th>City</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      {% for loc in location %}
+      <tr>
+        <td>{{ loc.name }}</td>
+        <td>{{ loc.address }}</td>
+        <td>{{ loc.city }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 </div>
 
@@ -69,5 +86,15 @@ var message = error.substring(68,104)
 if('{{form.errors}}' != '') {
   alert(message)
 }
+</script>
+<script>
+$(document).ready(function(){
+  $("#locSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
 </script>
 {% endblock %}
