@@ -72,10 +72,9 @@ hr.style1 {
   /*margin-bottom: 3%;*/
 }
 
-h2.style2 {
+hr.style2 {
   border-style: solid;
   border-width: thin;
-  border-color: black;
   margin-left: 3%;
   margin-right: 3%;
 }
@@ -168,6 +167,6 @@ hr.style1 {
 
 .search {
   margin-top: 2%;;
-  width: 85%;
+  width: 100%;
   margin-bottom: 2%;
 }
