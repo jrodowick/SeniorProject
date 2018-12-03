@@ -18,7 +18,12 @@ from oauth2client import file, client, tools
 import datetime
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from .tokens import account_activation_token
 
 
 
@@ -30,7 +35,8 @@ def index(request):
 
 @login_required
 def locations(request):
-    events = Event.objects.all()
+    #events = Event.objects.all()
+    locations = Location.objects.all()
     if request.method == 'POST':
         form = EventForm(request.POST, instance=request.user)
         if(form.is_valid()):
@@ -43,15 +49,15 @@ def locations(request):
                 created_by = request.user
             )
             mod_entry.save()
-            args = {'events':events, 'form':form}
+            #args = {'events':events, 'form':form}
             # return render(request, 'locations.html', args)
             return redirect('/send_alert/' + str(mod_entry.id))
         # else:
         #     return redirect('/locations')
     else:
         form = EventForm()
-        args = {'events':events,'form':form}
-    return render(request, 'locations.html', {'form':form})
+        #args = {'events':events,'form':form}
+    return render(request, 'locations.html', {'form':form,'location':locations})
 
 def view_event(request, event_id):
     # event_id = request.GET.get('id')
@@ -138,19 +144,64 @@ def get_data(request):
         response = json.dumps(location_and_events, default = str)
         return HttpResponse(response, content_type = 'application/json')
 
+# def register(request):
+#     if request.method == 'POST':
+#         form = RegistrationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit = True)
+#             if(user is not None):
+#                 login(request,user,backend='django.contrib.auth.backends.ModelBackend')
+#             return redirect('/')
+#
+#     else:
+#         form = RegistrationForm()
+#         args = {'form':form}
+#     return render(request, 'register.html', {'form':form})
 def register(request):
-    if request.method == 'POST':
+    if(request.method == 'POST'):
         form = RegistrationForm(request.POST)
-        if form.is_valid():
+        if(form.is_valid()):
             user = form.save(commit = True)
-            if(user is not None):
-                login(request,user,backend='django.contrib.auth.backends.ModelBackend')
-            return redirect('/')
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            message = render_to_string('activate_email.html',{
+                'user':user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                'token': account_activation_token.make_token(user),
+            })
+            email_subject = 'Activate your account.'
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(email_subject, message, to=[to_email])
+            email.send()
+            return HttpResponse('<h3>Please confirm your email address to complete registration.</h3>'
+                                + '<br>' +
+                                 '<h4>Clicking the link will log you in.</h4>'
+                                + '<br>' +
+                                 '<h4>You can close this window now.</h4>')
 
+            # if(user is not None):
+            #     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            # return redirect('/')
     else:
         form = RegistrationForm()
-        args = {'form':form}
+
     return render(request, 'register.html', {'form':form})
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect('/')
+    else:
+        return HttpResponse('Activation link is invalid.')
 
 @login_required
 def view_profile(request):
