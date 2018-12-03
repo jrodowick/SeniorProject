@@ -1,5 +1,5 @@
 body {
-  /* background: grey; */
+  background-color:#eff3f9;
 }
 
 .line-break {
@@ -38,6 +38,10 @@ body {
   background: #41f47d;
 }
 
+/* div.card {
+  height: 200px;
+} */
+
 .buffer .btn {
   border-radius: 6px;
 
@@ -68,6 +72,14 @@ hr.style1 {
   /*margin-bottom: 3%;*/
 }
 
+h2.style2 {
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
 .carousel {
   height:50vh;
   /*background-color: red;*/
@@ -75,6 +87,24 @@ hr.style1 {
 
 .carousel-indicators {
   height: 10px;
+}
+
+#eventDetails {
+
+  background-image: url("/static/images/close_grass.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+hr.style1 {
+  border-style: solid;
+  border-color:#42bff4;
+  border-width: thick;
+  margin-left: 3%;
+  margin-right: 3%;
+  /*margin-top: 5%;*/
+  /*margin-bottom: 3%;*/
 }
 
 .jumbo-main {
