@@ -129,10 +129,10 @@ hr.style1 {
 
 }
 
-.carousel-inner img {
+/* .carousel-inner img {
       width:50%;
       height: 100%;
-  }
+  } */
 
 
 
@@ -169,4 +169,11 @@ hr.style1 {
   margin-top: 2%;;
   width: 100%;
   margin-bottom: 2%;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
 }
