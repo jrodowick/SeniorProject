@@ -18,7 +18,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     preferences = models.CharField(max_length=100, default='')
     city = models.CharField(max_length=100, default='')
-    phone = models.IntegerField(default=0)
+    phone = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -70,3 +70,5 @@ class Event(models.Model):
             'attendees': self.attendees,
             'id': self.id
         }
+
+# class Event_Post(models.Models):

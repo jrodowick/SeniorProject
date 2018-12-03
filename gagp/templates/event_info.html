@@ -2,57 +2,185 @@
 
 {% load static %}
 
-{% block title %}Events Information{% endblock %}
+{% block title %}Event Information{% endblock %}
 
 {% block content %}
 
-  <div class="jumbotron" >
-    <h1 class="text-center"><u>Event details for | {{ event.name }}</u></h1>
+<div class="container">
+
+
+  <div class="jumbotron" style="margin-top:2%;" id="eventDetails">
+    <h1 class="text-center" style="font-family:Arial, Helvetica, sans-serif;">Event details for | {{ event.name }}</h1>
   </div>
-
-  <div class="container">
-
-
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Meeting up to play {{ event.activity }}</h4>
-      <p class="card-text">Location: <i>{{ event.location }}, {{ event.location.address }}, {{ event.location.city }}</i></p>
-      <a target="_blank" href="https://google.com/maps/place/{{event.location}}" class="card-link">Need directions? Click here for Google Maps</a>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <p>Created by: {{ event.created_by }}</p>
-    </div>
-    <div class="col">
-
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <p>Date: {{ event.date_of_event }}</p>
-    </div>
-    <div class="col">
-      <p>Begin time: {{ event.time_of_event }}</p>
-    </div>
-  </div>
-
-
-
-  <p>Number of attendees: {{ event.attendees.count }}</p>
-  <p>Attendees:
-    <ul>
-      {% for user in users %}
-      <li>{{user.username}}</li>
-      {% endfor %}
-    </ul>
-  </p>
-  <button type="button" class="btn btn-primary" onclick="join('{{ event.id }}')">Confirm attendance</button>
-  <button type="button" class="btn btn-success" onclick="add_google('{{ event.id }}')">Add to Google Calendar</button><br>
 
 </div>
+
+
+<body style="height:68vh;">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-sm-3 col-4" style="height:100%;" id="nav">
+        <nav id="myScrollspy">
+          <ul class="nav nav-pills flex-column" style="position:fixed;">
+            <li class="nav-item">
+              <a class="nav-link active" href="#section1">What</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section2">Where</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section3">When</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section4">Who</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#section5">Why</a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+      <div class="col-sm-9 col-8" data-spy="scroll" data-target="#myScrollspy" data-offset="1" style="position:relative;overflow-y:scroll;height:100%;">
+
+
+        <div class="card" id="section1">
+          <div class="card-body">
+            <h3 class="card-title">What</h3>
+            <hr class="style1">
+
+            <h4>This page contains the details for the event called: </h4>
+                <h3 style="margin-top:2%;margin-bottom:2%;"><em>{{ event.name }}</em></h3>
+                <hr class="style2">
+
+            <h4 class="card-title">This event is for meeting up to play:</h4>
+                <h3 style="margin-top:2%;margin-bottom:2%;"><em>{{ event.activity }}</em></h3>
+                <hr class="style2">
+
+
+            <hr class="style1">
+
+          </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="section2">
+          <div class="card-body">
+            <h3 class="card-title">Where</h3>
+            <hr class="style1">
+
+            <div class="row">
+              <div class="col">
+                <h5 class="card-text">City: {{ event.location.city }}</h5>
+                <hr class="style2">
+                <h5 class="card-text">Location: {{ event.location }}</h5>
+                <hr class="style2">
+                <h5 class="card-text">Street address: <em>{{ event.location.address }}</em></h5>
+                <hr class="style2">
+              </div>
+              <div class="col text-center">
+                <p>Need directions?</p>
+                <img src="{% static 'images/google-map.png' %}" alt="" style="width:15%;height:auto;">
+                <a target="_blank" href="https://google.com/maps/place/{{event.location}}" class="card-link">Click here for Google Maps</a>
+              </div>
+            </div>
+
+            <hr class="style1">
+          </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="section3">
+          <div class="card-body">
+            <h3 class="card-title">When</h3>
+            <hr class="style1">
+
+            <div class="row">
+              <div class="col">
+                <h5>Date: {{ event.date_of_event }}</h5>
+                <hr class="style2">
+                <h5>Time: {{ event.time_of_event }}</h5>
+                <hr class="style2">
+
+              </div>
+              <div class="col">
+                <img src="{% static 'images/google-cal.png' %}" alt="" style="width:10%;height:auto;">
+                <a target="_blank" href="https://calendar.google.com/calendar/r" type="button" class="btn btn-success text-center">Check your Google Calendar</a><br>
+
+              </div>
+            </div>
+
+            <hr class="style1">
+
+
+          </div>
+        </div>
+
+        <br>
+
+        <div class="card" id="section4" style="margin-bottom:3%;">
+          <div class="card-body">
+            <h3 class="card-title">Who</h3>
+            <hr class="style1">
+
+            <div class="row">
+              <div class="col">
+                <h5 >Event created by: {{ event.created_by }}</h5>
+                <hr class="style2">
+                <h5 >Number of users confirmed: {{ event.attendees.count }}</h5>
+                <hr class="style2">
+              </div>
+              <div class="col" style="overflow-y:scroll;">
+                <p>Attendees:
+                  {% if event.attendees.count == 0 %}
+                  <p>No confirmed users</p>
+                  {% else %}
+                  <ul>
+                    {% for user in users %}
+                    <li>{{user.username}}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </p>
+              </div>
+
+            </div>
+            <hr class="style1">
+
+          </div>
+        </div>
+
+
+        <div class="card" id="section5">
+          <div class="card-body">
+            <h3 class="card-title">Why</h3>
+            <hr class="style1">
+
+          <h1 class="text-center">To get active and go play!</h1>
+
+            <hr class="style1">
+
+          </div>
+        </div>
+
+        <br>
+        <button style="margin-bottom:3%;" type="button" class="btn btn-primary btn-block" onclick="join('{{ event.id }}')">Confirm attendance</button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+</body>
+
+
+
 {% endblock %}
 
 {% block scripts %}
