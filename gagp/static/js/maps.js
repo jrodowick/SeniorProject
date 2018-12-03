@@ -132,21 +132,3 @@ function closeMarkers(map,markers) {
     marker.infowindow.close(map,marker);
   })
 }
-
-function join(id) {
-  alert('You have confirmed attendance.');
-  $.ajax({
-    url: '/events/join/' + event_id + '/',
-    type: 'POST',
-    data: {
-      id: event_id
-    },
-    error: function (xhr, textStatus, thrownError){
-      alert("failure: " + xhr.statusText);
-    },
-    success: function(response) {
-      alert('Success')
-      //window.location.href = '/events/view/' + event_id
-    }
-  })
-}
