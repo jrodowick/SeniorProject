@@ -28,6 +28,7 @@ def index(request):
     args = {'selected':selected}
     return render(request, 'index.html', args)
 
+@login_required
 def locations(request):
     events = Event.objects.all()
     if request.method == 'POST':
@@ -180,17 +181,6 @@ def edit_profile(request):
         # args = {'form':form}
     return render(request, 'edit_profile.html', {'profile_form':profile_form, 'detail_form':detail_form})
 
-@login_required
-def edit_details(request):
-    if request.method == 'POST':
-        form = EditDeatilsForm(request.POST, instance=request.user.userprofile)
-        if form.is_valid():
-            form.save()
-            return redirect('/profile')
-    else:
-        form = EditDetailsForm(instance=request.user.userprofile)
-        args = {'form':form}
-    return render(request, 'edit_profile.html', {'detail_form':form})
 
 @login_required
 def change_password(request):

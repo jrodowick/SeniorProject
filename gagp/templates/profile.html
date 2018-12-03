@@ -15,7 +15,7 @@
       <p>Last name: {{ user.last_name }}</p>
       <p>Email: {{ user.email }}</p>
       <p>
-        Preferred activites: 
+        Preferred activities:
         {% if user.userprofile.preferences|first == '' %}
           You have not set your preferences.
         {% else %}
