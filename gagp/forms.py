@@ -8,6 +8,7 @@ from django.contrib.auth.forms import (
     )
 from .models import Event, EVENT_CHOICES, UserProfile
 import datetime
+import time
 
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(
@@ -202,5 +203,8 @@ class EventForm(forms.ModelForm):
 
     def clean(self):
         date = self.cleaned_data['date_of_event']
-        if date < datetime.date.today():
+        time = self.cleaned_data['time_of_event']
+        full_date = datetime.datetime.combine(date,time)
+
+        if date < datetime.date.today() or (date == datetime.date.today() and time < datetime.datetime.now().time()):
             raise forms.ValidationError("Date of event cannot be in the past!")
