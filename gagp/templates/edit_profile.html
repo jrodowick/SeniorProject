@@ -7,7 +7,7 @@
 {% block content %}
 
 
-<div class="row">
+<!-- <div class="row">
   <div class="form-signin" style="border:3px solid black;width:100%;">
     <h1>Edit Profile</h1>
     <form  method="post">
@@ -25,10 +25,9 @@
       <button class="btn btn-primary" type="submit">Submit &raquo;</button>
     </form>
   </div>
-</div>
+</div> -->
 
-<div class="row">
-  <div class="form-signin" style="border:3px solid black;">
+  <div class="form-signin">
     <h1>Edit Details</h1>
     <ul>
       <li>Use this section if you would like SMS updates for events</li>
@@ -37,8 +36,12 @@
     </ul>
     <form  method="post">
       {% csrf_token %}
+      <h3>Email</h3>
+      {{ detail_form.email}}
       <h3>Preferred Activities</h3>
       {{ detail_form.preferences }}<br>
+      <h3>City</h3>
+      {{ detail_form.city }}
       <h3>Phone Number</h3>
       {{ detail_form.phone }}<br>
 
@@ -48,7 +51,6 @@
       <button class="btn btn-primary" type="submit">Submit &raquo;</button>
     </form>
   </div>
-</div>
 
 
 

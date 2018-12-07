@@ -83,20 +83,40 @@ class EditProfileForm(UserChangeForm):
 
 
 class EditDetailsForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['preferences'].widget.attrs.update({'class':'form-control'})
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['preferences'].widget.attrs.update({'class':'form-control'})
     class Meta:
         model = UserProfile
         fields = (
+            # 'first_name',
+            'email',
             'preferences',
+            'city',
             'phone'
         )
 
+    email = forms.EmailField(
+        label = 'Email',
+        required = True,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'type':'email',
+        'placeholder':'Email address',
+        })
+    )
     preferences = forms.MultipleChoiceField(
         choices=EVENT_CHOICES,
         required=False,
         widget=forms.CheckboxSelectMultiple(),
+    )
+    city = forms.CharField(
+        label = 'City',
+        required=False,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'City'
+        })
     )
     phone = forms.IntegerField(
         required=False,
@@ -105,6 +125,9 @@ class EditDetailsForm(forms.ModelForm):
         'placeholder':'Phone Number'
         })
     )
+    # def save(self, commit=True):
+    #     #user = super(EditDetailsForm, self).save(commit=False)
+    #     UserProfile.user.email = self.cleaned_data['email']
 
 class ChangePassForm(PasswordChangeForm):
     class Meta:

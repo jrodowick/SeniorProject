@@ -33,7 +33,6 @@ def index(request):
     args = {'selected':selected}
     return render(request, 'index.html', args)
 
-@login_required
 def locations(request):
     #events = Event.objects.all()
     locations = Location.objects.all()
@@ -218,19 +217,27 @@ def view_profile(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        profile_form = EditProfileForm(request.POST, instance=request.user)
-        detail_form = EditDetailsForm(request.POST, instance=request.user.userprofile)
-        if profile_form.is_valid():
-            profile_form.save()
-            return redirect('/profile')
+        detail_form = EditDetailsForm(request.POST, instance=request.user)
         if detail_form.is_valid():
-            detail_form.save()
+            request.user.email = detail_form.cleaned_data['email']
+            request.user.userprofile.preferences = detail_form.cleaned_data['preferences']
+            request.user.userprofile.phone = detail_form.cleaned_data['phone']
+            request.user.save()
+            request.user.userprofile.save()
+            #detail_form.save()
             return redirect('/profile')
     else:
-        profile_form = EditProfileForm(instance=request.user)
-        detail_form = EditDetailsForm(instance=request.user.userprofile)
+        new_pref = []
+        request.user.userprofile.preferences = str.split(request.user.userprofile.preferences[1:-1], ', ')
+        for preference in request.user.userprofile.preferences:
+            new_pref.append(preference[1:-1])
+        initial = {'email':request.user.email,
+                   'preferences':new_pref,
+                   'city':request.user.userprofile.city,
+                   'phone':request.user.userprofile.phone}
+        detail_form = EditDetailsForm(initial = initial)
         # args = {'form':form}
-    return render(request, 'edit_profile.html', {'profile_form':profile_form, 'detail_form':detail_form})
+    return render(request, 'edit_profile.html', {'detail_form':detail_form})
 
 
 @login_required
