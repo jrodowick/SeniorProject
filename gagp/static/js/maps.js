@@ -98,10 +98,11 @@ function drop(locations, events) {
                     '<a href="#" data-toggle="modal" data-target="#eventForm">Create Event Here</a>'
     var infoWindow = new google.maps.InfoWindow({
       content: contentString,
-      maxWidth:500
+      maxWidth:500,
+      maxHeight:200
     })
-
-    codeAddress(locations[i]['address'], infoWindow, i*200);
+  //  alert(locations[i]['address'] + locations[i]['city'])
+    codeAddress(locations[i]['address'] + ' ' + locations[i]['city'], infoWindow, i*200);
   }
 }
 
@@ -121,6 +122,9 @@ function codeAddress(address, infoWindow, timeout) {
               closeMarkers(map,markers);
               map.panTo(marker.getPosition())
               infoWindow.open(map, marker);
+            })
+            google.maps.event.addListener(map, 'drag', function() {
+              closeMarkers(map,markers);
             })
           }
         }, timeout)
