@@ -8,7 +8,39 @@
 {% block content %}
 <!-- {% csrf_token %} -->
 
-<div class="container">
+<div class="container-fluid" style="margin-top:5%;">
+  <div class="row">
+    <div class="col-6">
+      <div id="map">
+      </div>
+    </div>
+    <div class="col-6">
+      <input type="text" class="form-control" placeholder="Search for a location" id="locSearch"><br>
+      <table class="table table-bordered" style="background-color:white;">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Address</th>
+            <th>City</th>
+          </tr>
+        </thead>
+        <tbody id="myTable">
+          {% for loc in location %}
+          <tr>
+            <td><a href="#">{{ loc.name }}</a></td>
+            <td>{{ loc.address }}</td>
+            <td>{{ loc.city }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- <div class="container">
   <br>
   <input type="text" class="form-control" placeholder="Search for a location" id="locSearch"><br>
   <table class="table table-bordered" style="background-color:white;">
@@ -35,7 +67,7 @@
 <div class="container">
   <div id="map">
   </div>
-</div>
+</div> -->
 
 <!-- Event Form Modal -->
 <div class="modal fade" role="dialog" id="eventForm" >
