@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
     PasswordChangeForm,
     PasswordResetForm
     )
-from .models import Event, EVENT_CHOICES, UserProfile
+from .models import Event, EVENT_CHOICES, UserProfile, Event_Post
 import datetime
 import time
 
@@ -208,3 +208,19 @@ class EventForm(forms.ModelForm):
 
         if date < datetime.date.today() or (date == datetime.date.today() and time < datetime.datetime.now().time()):
             raise forms.ValidationError("Date of event cannot be in the past!")
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Event_Post
+        fields = ('message',)
+
+    message = forms.CharField(
+        label='Message',
+        max_length=120,
+        widget = forms.TextInput(attrs={
+        'class':'form-control',
+        'placeholder':'Say something about this event',
+        })
+    )

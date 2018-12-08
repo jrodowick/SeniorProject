@@ -22,7 +22,7 @@
     <div class="row">
       <div class="col-sm-3 col-4" style="height:100%;" id="nav">
         <nav id="myScrollspy">
-          <ul class="nav nav-pills flex-column" style="position:fixed;">
+          <ul class="nav nav-pills flex-column text-center" style="position:relative;">
             <li class="nav-item">
               <a class="nav-link active" href="#section1">What</a>
             </li>
@@ -40,7 +40,14 @@
             </li>
           </ul>
         </nav>
-
+        <br>
+        <a href="#" data-toggle="modal" data-target="#postForm">Post a message here!</a>
+        {% for post in posts %}
+        <div class="container" style="background-color:white;border-style:solid;border-color:green;border-width:thin;margin-top:1%;">
+          <p>{{ post.author }} says: {{ post.message }}</p>
+          <p>Posted on: {{ post.posted_data }}</p>
+        </div>
+        {% endfor %}
       </div>
 
 
@@ -182,6 +189,32 @@
     </div>
 
   </div>
+
+
+  <div class="modal fade" role="dialog" id="postForm">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="#event-title" class="modal-title">Send message to this event</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" >
+          <form method="post">
+            {% csrf_token %}
+
+            {{ form.message }}
+
+            <button class="btn btn-primary btn-block" type="Submit">Post</button>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 

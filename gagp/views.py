@@ -5,6 +5,7 @@ from .forms import (
     EditProfileForm,
     EditDetailsForm,
     EventForm,
+    PostForm,
 )
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm,PasswordChangeForm
@@ -59,19 +60,29 @@ def locations(request):
     return render(request, 'locations.html', {'form':form,'location':locations})
 
 def view_event(request, event_id):
-    # event_id = request.GET.get('id')
+    event = Event.objects.get(id=event_id)
+    users = event.attendees.all().values()
+    posts = event.posts.all()
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance = request.user)
+        if form.is_valid():
+            post = Event_Post(
+                message = form.cleaned_data['message'],
+                author = request.user
+            )
+            print(request.user)
+            post.save()
+            event.posts.add(post)
+            form = PostForm()
     if request.method == 'GET':
-        event = Event.objects.get(id=event_id)
-        users = event.attendees.all().values()
-        args = {'event':event,'users':users}
-        return render(request, 'event_info.html', args)
+        form = PostForm()
+    args = {'event':event,'users':users,'form':form,'posts':posts}
+    return render(request, 'event_info.html', args)
 
 def join_event(request, event_id):
     # user = request.user.username
     event = Event.objects.get(id=event_id)
     event.attendees.add(request.user)
-    print(event)
-    print(event.attendees.all())
     return redirect('/profile')
 
 def add_to_calendar(request, event_id):

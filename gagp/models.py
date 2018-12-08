@@ -45,6 +45,14 @@ class Location(models.Model):
             'city': self.city,
         }
 
+class Event_Post(models.Model):
+    message = models.CharField(max_length=120)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    posted_data = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
+
 class Event(models.Model):
     name = models.CharField(max_length = 50)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
@@ -54,6 +62,7 @@ class Event(models.Model):
     activity = models.CharField(choices = EVENT_CHOICES, max_length = 50)
     created_by = models.ForeignKey(User,  related_name='creator', on_delete = models.CASCADE)
     attendees = models.ManyToManyField(User)
+    posts = models.ManyToManyField(Event_Post)
 
     def __str__(self):
         return self.name
@@ -70,5 +79,3 @@ class Event(models.Model):
             'attendees': self.attendees,
             'id': self.id
         }
-
-# class Event_Post(models.Models):
