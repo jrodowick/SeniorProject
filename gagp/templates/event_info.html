@@ -170,7 +170,7 @@
             <hr class="style1">
             <div class="text-center">
               <h3>Share on social media</h3>
-              <button type="button" class="btn btn-primary" style="background-color:#3b5998"> Facebook</button>
+              <a class="btn btn-primary" id="facebookBtn" style="background-color:#3b5998" href="https://www.facebook.com/sharer/sharer.php?u=">Facebook</a>
               <a class="twitter-share-button btn btn-primary" id="twitterBtn" style="background-color:#1da1f2" href="https://twitter.com/intent/tweet?text=">Tweet</a>
             </div>
 
@@ -226,6 +226,9 @@
     href += 'Check%20out%20this%20sweet%20event%20on%20';
     href += window.location.href;
     document.getElementById("twitterBtn").href = href;
+    face_href = document.getElementById("facebookBtn").href;
+    face_href += window.location.href;
+    document.getElementById("facebookBtn").href = face_href;
   })
 </script>
 {% endblock %}
