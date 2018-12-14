@@ -173,8 +173,8 @@
             <hr class="style1">
             <div class="text-center">
               <h3>Share on social media</h3>
-              <button type="button" class="btn btn-primary" style="background-color:#3b5998"><img src="{% static 'images/facebook-signin.png' %}" style="width:1vw;height:auto;"> Facebook</button>
-              <button type="button" class="btn btn-primary" style="background-color:#1da1f2"><img src="{% static 'images/twitter.png' %}" style="width:1vw;height:auto;"> Twitter</button>
+              <button type="button" class="btn btn-primary" style="background-color:#3b5998"> Facebook</button>
+              <a class="twitter-share-button btn btn-primary" id="twitterBtn" style="background-color:#1da1f2" href="https://twitter.com/intent/tweet?text=">Tweet</a>
             </div>
 
           </div>
@@ -223,4 +223,12 @@
 
 {% block scripts %}
 <script src="{% static 'js/events.js' %}"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var href = document.getElementById("twitterBtn").href;
+    href += 'Check%20out%20this%20sweet%20event%20on%20';
+    href += window.location.href;
+    document.getElementById("twitterBtn").href = href;
+  })
+</script>
 {% endblock %}
