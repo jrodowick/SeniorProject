@@ -57,12 +57,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # <--
+
 ]
 
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.open_id.OpenIdAuth',  # for Google authentication
     'social_core.backends.google.GoogleOpenId',  # for Google authentication
     'social_core.backends.google.GoogleOAuth2',
+
+    'social_core.backends.facebook.FacebookOAuth2',
+
 
     'django.contrib.auth.backends.ModelBackend'
 ]
@@ -145,5 +151,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='115949803790-9gfcrtn5h06141mpj8a93n922mtbnrfc.apps.googleusercontent.com'  #Paste CLient Key
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 's0XpHRTAyLhhNQHQX-tn_wSg'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '2063607537041842'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'f8abb35a56216208b02e3a8f835d75a7'
 
 GEOPOSITION_GOOGLE_MAPS_API_KEY = 'AIzaSyBz8pNaXo0A-z_7BSD-S_KZ7EafjbvdQsY'
