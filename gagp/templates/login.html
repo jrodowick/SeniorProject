@@ -5,14 +5,14 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="form-signin">
+<div class="container text-center">
   <h1 class="text-center">Welcome</h1>
 
   <h2 class="text-center">
     You can log in here!
   </h2>
 
-  <form method="post">
+  <form method="post" class="text-center">
     {% csrf_token %}
     <input type="username" name="username" autofocus class="form-control" placeholder="Username" required id="id_username" /><br>
     <input type="password" name="password" required class="form-control" placeholder="Password" required id="id_password" />

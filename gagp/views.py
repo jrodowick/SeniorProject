@@ -232,6 +232,7 @@ def edit_profile(request):
         if detail_form.is_valid():
             request.user.email = detail_form.cleaned_data['email']
             request.user.userprofile.preferences = detail_form.cleaned_data['preferences']
+            request.user.userprofile.city = detail_form.cleaned_data['city']
             request.user.userprofile.phone = detail_form.cleaned_data['phone']
             request.user.save()
             request.user.userprofile.save()
