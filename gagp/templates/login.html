@@ -5,14 +5,14 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="container text-center">
-  <h1 class="text-center">Welcome</h1>
+<div class="container" style="padding-top:3%;">
+  <h1>Welcome</h1>
 
-  <h2 class="text-center">
+  <h2>
     You can log in here!
   </h2>
 
-  <form method="post" class="text-center">
+  <form method="post" class="text-center" style="max-width:80%;">
     {% csrf_token %}
     <input type="username" name="username" autofocus class="form-control" placeholder="Username" required id="id_username" /><br>
     <input type="password" name="password" required class="form-control" placeholder="Password" required id="id_password" />
@@ -20,10 +20,10 @@
     <button class="btn btn-primary btn-block" type="submit">Login</button><br>
     <p style="text-align:center;"><strong> -- OR -- </strong></p>
      <a class="btn btn-lg btn-primary btn-block" href="{% url 'social:begin' 'google-oauth2' %}" style="color:white;">
-        <img src="{% static 'images/google-signin.png' %}" style="width:10%;height:auto;">Login with Google
+        <img src="{% static 'images/google-signin.png' %}" style="width:8%;height:auto;">Login with Google
      </a>
      <a class="btn btn-lg btn-primary btn-block" href="#" style="color:white;background-color:#3b5998">
-        <img src="{% static 'images/facebook-signin.png' %}" style="width:10%;height:auto;"> Login with Facebook
+        <img src="{% static 'images/facebook-signin.png' %}" style="width:8%;height:auto;"> Login with Facebook
      </a>
   </form>
 
