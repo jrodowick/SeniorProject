@@ -6,13 +6,13 @@
 
 {% block content %}
 <div class="container" style="padding-top:3%;">
-  <h1>Welcome</h1>
+  <h1 style="margin-left:20%;">Welcome</h1>
+    <h2 style="margin-left:20%;">You can log in here!</h2>
 
-  <h2>
-    You can log in here!
-  </h2>
 
-  <form method="post" class="text-center" style="max-width:80%;">
+
+
+  <form method="post" class="text-center reg-form" >
     {% csrf_token %}
     <input type="username" name="username" autofocus class="form-control" placeholder="Username" required id="id_username" /><br>
     <input type="password" name="password" required class="form-control" placeholder="Password" required id="id_password" />

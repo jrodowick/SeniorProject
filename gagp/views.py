@@ -34,6 +34,7 @@ def index(request):
     args = {'selected':selected}
     return render(request, 'index.html', args)
 
+@login_required
 def locations(request):
     #events = Event.objects.all()
     locations = Location.objects.all()
@@ -59,6 +60,7 @@ def locations(request):
         #args = {'events':events,'form':form}
     return render(request, 'locations.html', {'form':form,'location':locations})
 
+@login_required
 def view_event(request, event_id):
     event = Event.objects.get(id=event_id)
     users = event.attendees.all().values()
@@ -79,6 +81,7 @@ def view_event(request, event_id):
     args = {'event':event,'users':users,'form':form,'posts':posts}
     return render(request, 'event_info.html', args)
 
+@login_required
 def join_event(request, event_id):
     # user = request.user.username
     event = Event.objects.get(id=event_id)

@@ -43,7 +43,7 @@
         <br>
         <a href="#" data-toggle="modal" data-target="#postForm">Post a message here!</a>
         {% for post in posts %}
-        <div class="container" style="background-color:white;border-style:solid;border-color:green;border-width:thin;margin-top:1%;">
+        <div class="container post" style="background-color:white;border-style:solid;border-color:green;border-width:thin;margin-top:1%;">
           <p>{{ post.author }} says: {{ post.message }}</p>
           <p>Posted on: {{ post.posted_data }}</p>
         </div>
@@ -135,14 +135,12 @@
             <h3 class="card-title">Who</h3>
             <hr class="style1">
 
-            <div class="row">
-              <div class="col">
+            <div class="row attendees">
+              <div class="col" style="overflow-y:scroll;">
                 <h5 >Event created by: {{ event.created_by }}</h5>
                 <hr class="style2">
                 <h5 >Number of users confirmed: {{ event.attendees.count }}</h5>
                 <hr class="style2">
-              </div>
-              <div class="col" style="overflow-y:scroll;">
                 <p>Attendees:
                   {% if event.attendees.count == 0 %}
                   <p>No confirmed users</p>
@@ -155,7 +153,6 @@
                   {% endif %}
                 </p>
               </div>
-
             </div>
             <hr class="style1">
 
